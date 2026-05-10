@@ -1,0 +1,34 @@
+name: iCloudClean
+options:
+  bundleIdPrefix: com.fourthtemple
+  deploymentTarget:
+    macOS: "14.0"
+    iOS: "17.0"
+
+targets:
+  iCloudClean:
+    type: application
+    platform: [macOS, iOS]
+    sources:
+      - path: Sources/iCloudClean
+    info:
+      path: Sources/iCloudClean/App/Info.plist
+      properties:
+        CFBundleDisplayName: iCloudClean
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSPhotoLibraryUsageDescription: "iCloudClean needs access to analyze your iCloud Photos storage."
+        NSPhotoLibraryAddUsageDescription: "iCloudClean needs access to manage your iCloud Photos."
+    entitlements:
+      path: Sources/iCloudClean/App/iCloudClean.entitlements
+      properties:
+        # Sandbox disabled during development — re-enable before App Store submission
+        # (requires paid Apple Developer account for iCloud entitlements)
+        com.apple.security.app-sandbox: false
+        com.apple.security.network.client: true
+        com.apple.security.files.user-selected.read-write: true
+        com.apple.security.personal-information.photos-library: true
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.fourthtemple.iCloudClean
+      SWIFT_VERSION: "5.9"
+      ENABLE_HARDENED_RUNTIME: NO
