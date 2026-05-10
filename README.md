@@ -19,7 +19,7 @@ A native macOS app for visualizing and cleaning up iCloud Drive storage using an
 
 ## Screenshots
 
-> Coming soon
+![iCloudClean treemap view](screenshot.png)
 
 ## Requirements
 
