@@ -189,20 +189,22 @@ struct ContentView: View {
                 }
                 .disabled(aggregator.isScanning)
             }
-            ToolbarItem(placement: .automatic) {
-                Button {
-                    showDiskAccessSheet = true
-                } label: {
-                    ZStack(alignment: .topTrailing) {
-                        Image(systemName: "lock.shield.fill")
-                            .foregroundStyle(.orange)
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 8, height: 8)
-                            .offset(x: 4, y: -4)
+            if aggregator.needsFullDiskAccess {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        showDiskAccessSheet = true
+                    } label: {
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: "lock.shield.fill")
+                                .foregroundStyle(.orange)
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                                .offset(x: 4, y: -4)
+                        }
                     }
+                    .help("Full Disk Access needed to see all iCloud Drive files")
                 }
-                .help("Full Disk Access needed to see all iCloud Drive files")
             }
         }
         .task { await aggregator.scan() }
