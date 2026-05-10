@@ -342,7 +342,8 @@ struct BreadcrumbBar: View {
     var body: some View {
         // Always render at a fixed height to avoid layout shifts that cause
         // the hover-bar flutter (bar appears → treemap shifts → hover lost → repeat).
-        HStack(spacing: 0) {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
                 if !path.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 4) {
@@ -402,10 +403,10 @@ struct BreadcrumbBar: View {
                     .help("Delete \"\(path.last?.name ?? "")\" and all its contents")
                 }
             }
+            .frame(minHeight: 28)
+            .background(hasContent ? Color.secondary.opacity(0.08) : Color.clear)
+            .opacity(hasContent ? 1 : 0)
+            Divider()
         }
-        .frame(minHeight: 28)
-        .background(hasContent ? Color.secondary.opacity(0.08) : Color.clear)
-        .opacity(hasContent ? 1 : 0)
-        Divider()
     }
 }
